@@ -41,7 +41,8 @@ apply plugin: 'idea'
 dependencyManagement {
   imports {
     mavenBom 'io.github.jhipster:jhipster-dependencies:' + jhipster_dependencies_version
-    //jhipster-needle-gradle-dependency-management - JHipster will add additional dependencies management here
+    // jhipster-needle-gradle-dependency-management - JHipster will add additional dependencies management here.
+    mavenBom 'org.activiti.cloud:activiti-cloud-dependencies:'+ activiti_cloud_version
   }
 }
 
@@ -167,7 +168,9 @@ repositories {
 dependencies {
     // Use ", version: jhipster_dependencies_version, changing: true" if you want
     // to use a SNAPSHOT release instead of a stable release
-    compile group: "io.github.jhipster", name: "jhipster-framework"
+    compile ("io.github.jhipster:jhipster-framework"){
+        exclude group: 'io.springfox'
+    }
     compile "org.springframework.boot:spring-boot-starter-cache"
     compile "io.dropwizard.metrics:metrics-core"
     compile "io.dropwizard.metrics:metrics-json"
@@ -252,6 +255,15 @@ dependencies {
     testCompile "com.h2database:h2"
     liquibaseRuntime "com.h2database:h2"
     //jhipster-needle-gradle-dependency - JHipster will add additional dependencies here
+    // activiti cloud query service.
+    compile ("org.activiti.cloud:activiti-cloud-starter-query"){
+        exclude module: 'activiti-cloud-services-identity-keycloak'
+        exclude module: 'activiti-cloud-services-common-security-keycloak'
+        exclude module: 'activiti-cloud-services-common-identity-keycloak'
+        exclude module: 'activiti-cloud-services-metadata'
+        exclude module: 'spring-cloud-config-client'
+    }
+
 }
 
 task cleanResources(type: Delete) {

@@ -1,10 +1,15 @@
 package com.l2l.enterprise.vessel;
 
 import com.l2l.enterprise.vessel.config.ApplicationProperties;
+import com.l2l.enterprise.vessel.config.CustomSpringBootApplication;
 import com.l2l.enterprise.vessel.config.DefaultProfileUtil;
 
+import com.l2l.enterprise.vessel.config.EnableCustomActivitiQuery;
+import com.l2l.enterprise.vessel.repository.ExtendedProcessInstanceRepository;
 import io.github.jhipster.config.JHipsterConstants;
 
+import org.activiti.cloud.services.query.app.repository.ProcessInstanceRepository;
+import org.activiti.cloud.starter.query.configuration.ActivitiQueryAutoConfiguration;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,6 +19,7 @@ import org.springframework.boot.autoconfigure.liquibase.LiquibaseProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.core.env.Environment;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 import javax.annotation.PostConstruct;
 import java.net.InetAddress;
@@ -21,9 +27,13 @@ import java.net.UnknownHostException;
 import java.util.Arrays;
 import java.util.Collection;
 
-@SpringBootApplication
+@SpringBootApplication(
+    exclude = {ActivitiQueryAutoConfiguration.class}
+)
+@EnableCustomActivitiQuery
 @EnableConfigurationProperties({LiquibaseProperties.class, ApplicationProperties.class})
 @EnableDiscoveryClient
+@EnableJpaRepositories(basePackageClasses = {ExtendedProcessInstanceRepository.class, ProcessInstanceRepository.class})
 public class VesselQueryApp {
 
     private static final Logger log = LoggerFactory.getLogger(VesselQueryApp.class);

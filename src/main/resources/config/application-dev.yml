@@ -40,6 +40,7 @@ spring:
             enabled: false # we use Webpack dev server + BrowserSync for livereload
     jackson:
         serialization.indent_output: true
+        serialization.fail-on-unwrapped-type-identifiers: ${ACT_QUERY_JACKSON_FAIL_ON_UNWRAPPED_IDS:false} # bqzhu +
     datasource:
         type: com.zaxxer.hikari.HikariDataSource
         url: jdbc:h2:file:./build/h2db/db/vesselquery;DB_CLOSE_DELAY=-1
@@ -64,6 +65,10 @@ spring:
             hibernate.cache.hazelcast.instance_name: VesselQuery
             hibernate.cache.use_minimal_puts: true
             hibernate.cache.hazelcast.use_lite_member: true
+            hibernate.jdbc.lob.non_contextual_creation: true # bqzhu +
+        generate-ddl: ${ACT_QUERY_GENERATEDDL:true}
+        hibernate:
+          ddl-auto: ${ACT_QUERY_DDLAUTO:create}
     liquibase:
         contexts: dev
     mail:
@@ -81,6 +86,15 @@ spring:
         locator:
             discovery:
                 enabled: true
+
+    activiti:
+        cloud:
+            services:
+                query:
+                    graphql:
+                        ws:
+                            enabled: false
+                        enabled: false
 
 server:
     port: 8083
@@ -145,3 +159,8 @@ jhipster:
 # ===================================================================
 
 # application:
+
+
+# bqzhu + , copy from ttc-query-campaign
+spring.activiti.cloud.services.query.graphql.ws.enabled: false
+spring.activiti.cloud.services.query.graphql.enabled: false
