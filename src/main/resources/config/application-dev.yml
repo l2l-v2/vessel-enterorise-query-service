@@ -66,9 +66,9 @@ spring:
             hibernate.cache.use_minimal_puts: true
             hibernate.cache.hazelcast.use_lite_member: true
             hibernate.jdbc.lob.non_contextual_creation: true # bqzhu +
-        generate-ddl: ${ACT_QUERY_GENERATEDDL:true}
+        generate-ddl: ${ACT_QUERY_GENERATEDDL:true} # bqzhu +
         hibernate:
-          ddl-auto: ${ACT_QUERY_DDLAUTO:create}
+          ddl-auto: ${ACT_QUERY_DDLAUTO:update} # bqzhu +
     liquibase:
         contexts: dev
     mail:

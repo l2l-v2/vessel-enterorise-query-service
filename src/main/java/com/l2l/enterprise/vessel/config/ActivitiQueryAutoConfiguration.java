@@ -9,8 +9,8 @@ import org.springframework.context.annotation.Configuration;
     "org.activiti.cloud.alfresco",
     "org.activiti.spring"
  })
-public class CustomActivitiQueryAutoConfiguration {
-    public CustomActivitiQueryAutoConfiguration(){
+public class ActivitiQueryAutoConfiguration {
+    public ActivitiQueryAutoConfiguration(){
         System.out.println("====CustomActivitiQueryAutoConfiguration====");
     }
 

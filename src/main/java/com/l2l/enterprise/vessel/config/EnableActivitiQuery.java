@@ -12,8 +12,5 @@ import java.lang.annotation.*;
     basePackages = {"org.activiti.cloud.services.query.model"}
 )
 @Inherited
-//@EnableAutoConfiguration(
-//    exclude = {ActivitiQueryAutoConfiguration.class}
-//)
-public @interface EnableCustomActivitiQuery {
+public @interface EnableActivitiQuery {
 }

@@ -1,2 +1,2 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-    com.l2l.enterprise.vessel.config.CustomActivitiQueryAutoConfiguration
+    com.l2l.enterprise.vessel.config.ActivitiQueryAutoConfiguration
